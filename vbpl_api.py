@@ -126,7 +126,7 @@ def tim_kiem_web(so_ky_hieu, dia_phuong="tphcm"):
     try:
         resp = requests.get(url, params=params, headers=HEADERS, timeout=REQUEST_TIMEOUT)
         resp.encoding = "utf-8"
-        soup = BeautifulSoup(resp.text, "lxml")
+        soup = BeautifulSoup(resp.text, "html.parser")
         items = []
         for sel in [".list-vbpq-result .row-item", ".vbpq-item",
                     "ul.list-vbpq > li", ".search-result-item"]:
@@ -157,7 +157,7 @@ def lay_chi_tiet_web(url):
     try:
         resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
         resp.encoding = "utf-8"
-        soup   = BeautifulSoup(resp.text, "lxml")
+        soup = BeautifulSoup(resp.text, "html.parser")
         detail = {}
         for sel in ["h1.title-vb", ".title-main", "h1"]:
             el = soup.select_one(sel)
